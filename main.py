@@ -1,13 +1,15 @@
 from flask import Flask
 from flask import request
 from flask import Response
+from flask_cors import CORS
 
 from t2s import genEnSpeech
 
 app = Flask(__name__)
+CORS(app)
 
 
-@app.route('/', methods=['GET'])
+@app.route('/speech', methods=['GET'])
 def hello():
     text = request.args.get('text')
     speech = genEnSpeech(text)
