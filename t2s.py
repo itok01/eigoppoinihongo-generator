@@ -3,7 +3,7 @@ import pykakasi
 from google.cloud import texttospeech
 
 
-def genEnSpeech(text):
+def genEnSpeech(text, gender):
     kakasi = pykakasi.kakasi()
 
     kakasi.setMode("H", "a")
@@ -18,9 +18,13 @@ def genEnSpeech(text):
     synthesis_input = texttospeech.types.SynthesisInput(
         text=conv.do(h2z(text)))
 
+    ssml_gende = texttospeech.enums.SsmlVoiceGender.FEMALE
+    if gender == 'male':
+        ssml_gende = texttospeech.enums.SsmlVoiceGender.MALE
+
     voice = texttospeech.types.VoiceSelectionParams(
         language_code='en-US',
-        ssml_gender=texttospeech.enums.SsmlVoiceGender.NEUTRAL)
+        ssml_gender=ssml_gende)
 
     audio_config = texttospeech.types.AudioConfig(
         audio_encoding=texttospeech.enums.AudioEncoding.MP3)

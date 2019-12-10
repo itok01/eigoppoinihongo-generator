@@ -12,7 +12,8 @@ CORS(app)
 @app.route('/speech', methods=['GET'])
 def hello():
     text = request.args.get('text')
-    speech = genEnSpeech(text)
+    gender = request.args.get('gender')
+    speech = genEnSpeech(text, gender)
     return Response(speech, mimetype='audio/mp3')
 
 
